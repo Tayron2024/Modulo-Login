@@ -168,7 +168,7 @@ WHITENOISE_USE_FINDERS = DEBUG
 
 # Email - recuperación de contraseña
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend') or 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
@@ -227,3 +227,4 @@ if GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET:
     }
 
 PASSWORD_RESET_TIMEOUT = 86400
+PASSWORD_RESET_TIMEOUT_DAYS = 1
