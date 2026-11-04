@@ -12,12 +12,22 @@
     h2 { color: #89b4fa; margin-bottom: 1rem; }
     label { display: block; margin-bottom: 0.5rem; color: #a6e3a1; }
     input[type="text"], input[type="password"], input[type="email"] { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #45475a; border-radius: 4px; background: #1e1e2e; color: #cdd6f4; }
-    button { background: #89b4fa; color: #1e1e2e; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
-    button:hover { background: #b4befe; }
+    button, .btn { background: #89b4fa; color: #1e1e2e; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: bold; transition: .2s; display: inline-flex; align-items: center; justify-content: center; width: 100%; font-size: 1rem; text-decoration: none; }
+    button:hover, .btn:hover { background: #b4befe; transform: translateY(-1px); }
+    .btn-google { background: #fff; color: #1e1e2e; border: 1px solid #dadce0; }
+    .btn-google:hover { background: #f8f9fa; }
+    .btn-google svg { width: 18px; height: 18px; margin-right: 10px; }
+    .divider { display: flex; align-items: center; text-align: center; margin: 1.5rem 0; color: #7f849c; }
+    .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #45475a; }
+    .divider span { padding: 0 10px; font-size: .85rem; }
+    .link { display: block; text-align: center; margin-top: 1rem; }
+    .form-footer { text-align: center; margin-top: 1rem; color: #a6e3a1; }
+    .form-footer a { color: #89b4fa; }
     a { color: #89b4fa; text-decoration: none; }
     a:hover { text-decoration: underline; }
     .nav { margin-bottom: 1rem; }
     .nav a { margin-right: 1rem; }
+    .icon { font-size: 1.2rem; margin-right: 8px; }
   </style>
 </head>
 <body>
