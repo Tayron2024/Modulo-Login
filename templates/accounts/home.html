@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="home-container">
+  <h2>Bienvenido al Sistema de Casilleros Inteligentes IoT</h2>
+  {% if user.is_authenticated %}
+    <p>Has iniciado sesión como <strong>{{ user.username }}</strong>.</p>
+    <form method="post" action="{% url 'accounts:logout' %}">
+      {% csrf_token %}
+      <button type="submit">Cerrar sesión</button>
+    </form>
+  {% else %}
+    <p><a href="{% url 'accounts:login' %}">Iniciar sesión</a></p>
+  {% endif %}
+</div>
+{% endblock %}

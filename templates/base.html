@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Casilleros Inteligentes IoT{% endblock %}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1e1e2e; color: #cdd6f4; line-height: 1.6; }
+    .container { max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
+    .login-container, .home-container { background: #313244; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+    h2 { color: #89b4fa; margin-bottom: 1rem; }
+    label { display: block; margin-bottom: 0.5rem; color: #a6e3a1; }
+    input[type="text"], input[type="password"], input[type="email"] { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #45475a; border-radius: 4px; background: #1e1e2e; color: #cdd6f4; }
+    button { background: #89b4fa; color: #1e1e2e; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #b4befe; }
+    a { color: #89b4fa; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .nav { margin-bottom: 1rem; }
+    .nav a { margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      {% if user.is_authenticated %}
+        <a href="{% url 'accounts:logout' %}">Cerrar sesión</a>
+      {% else %}
+        <a href="{% url 'accounts:login' %}">Iniciar sesión</a>
+      {% endif %}
+    </nav>
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

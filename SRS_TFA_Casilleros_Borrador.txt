@@ -1,0 +1,139 @@
+================================================================================
+DOCUMENTO DE ESPECIFICACIÓN DE REQUERIMIENTOS (SRS)
+Versión previa y preliminar — No completo
+================================================================================
+Proyecto: Sistema de gestión de casilleros inteligentes con control de acceso
+          mediante tecnología IoT
+Asignatura: Procesos de Software — TFA
+Fecha: Octubre 2026
+Estado: Borrador inicial para revisión
+
+================================================================================
+1. PROPÓSITO
+================================================================================
+Definir, de forma preliminar, los requerimientos de software y del sistema
+embebido para una aplicación web integrada con hardware IoT que gestione el
+acceso electrónico a casilleros inteligentes y su disponibilidad en tiempo real.
+
+Este documento es una versión previa y no exhaustiva. Contiene solo los
+requerimientos principales; se completará en entregas posteriores.
+
+================================================================================
+2. ALCANCE
+================================================================================
+Incluye:
+- Plataforma web (portal de usuario y panel administrativo).
+- Backend para gestión de usuarios, reservas y auditoría.
+- Dispositivo IoT (ESP32) con cerradura electrónica/servomotor.
+- Comunicación ligera entre web y dispositivo (MQTT/HTTP).
+- PIN dinámico temporal para apertura física.
+
+Excluye (fase futura):
+- App móvil nativa.
+- Pagos en línea integrados.
+- Integración con sistemas de acceso corporativos existentes.
+
+================================================================================
+3. DEFINICIONES Y ACRÓNIMOS
+================================================================================
+- CASILLERO: Unidad física de almacenamiento con cerradura electrónica.
+- DISPOSITIVO IoT: ESP32 que controla la cerradura de un casillero.
+- PIN DINÁMICO: Código de un solo uso y tiempo limitado para abrir un casillero.
+- ESTADO DEL CASILLERO: Disponible, Reservado, Ocupado, Mantenimiento.
+- MQTT/HTTP: Protocolos de comunicación ligera entre el backend y el ESP32.
+- FDD: Feature-Driven Development (metodología seleccionada).
+- KANBAN: Tablero visual de seguimiento de tareas.
+
+================================================================================
+4. REQUERIMIENTOS FUNCIONALES PRINCIPALES
+================================================================================
+
+RF01 — Registro y autenticación de usuarios
+El sistema permitirá el registro y el inicio de sesión de usuarios con rol
+Usuario o Administrador, validando credenciales y gestionando sesiones seguras.
+
+RF02 — Consulta de disponibilidad en tiempo real
+El sistema mostrará el estado actual de cada casillero (Disponible, Reservado,
+Ocupado, Mantenimiento) actualizado mediante comunicación con el dispositivo IoT.
+
+RF03 — Gestión de reservas
+Un usuario autenticado podrá seleccionar un casillero disponible, definir fecha
+y hora de inicio y fin, y recibir confirmación de reserva. El sistema liberará
+el casillero automáticamente al finalizar el tiempo reservado.
+
+RF04 — Generación y entrega de PIN dinámico
+Al confirmar una reserva activa, el sistema generará un PIN de un solo uso con
+fecha de expiración y lo enviará al usuario para la apertura física del casillero.
+
+RF05 — Control de acceso IoT
+El dispositivo ESP32 recibirá el comando de apertura (vía MQTT/HTTP) tras
+validar el PIN dinámico ingresado en el casillero físico y activará la
+cerradura electrónica/servomotor.
+
+RF06 — Panel de administración
+Un Administrador podrá consultar el estado global de los casilleros, realizar
+abertura manual de cualquier casillero y gestionar incidentes técnicos.
+
+RF07 — Auditoría e historial
+El sistema registrará eventos de aperturas, cierres, reservas, cancelaciones y
+mantenimientos, asociando usuario, casillero, fecha y duración.
+
+RF08 — Gestión de dispositivos IoT
+El administrador podrá asociar un dispositivo ESP32 a un casillero y consultar
+su estado de conexión (conectado/desconectado).
+
+================================================================================
+5. REQUERIMIENTOS NO FUNCIONALES PRINCIPALES
+================================================================================
+
+RNF01 — Rendimiento
+La consulta de disponibilidad de casilleros deberá responder en menos de 2
+segundos bajo condiciones normales de red.
+
+RNF02 — Disponibilidad
+El sistema web estará disponible 24/7 excepto por ventanas de mantenimiento
+programadas notificadas con anticipación.
+
+RNF03 — Seguridad
+- Las contraseñas se almacenarán hashadas.
+- El PIN dinámico expirará tras un uso o tras su tiempo de validez.
+- La comunicación Web ↔ Backend usará HTTPS.
+- La comunicación Backend ↔ ESP32 usará autenticación básica o token ligero.
+
+RNF04 — Escalabilidad
+El diseño permitirá agregar nuevos casilleros y dispositivos IoT sin
+modificar el núcleo del backend.
+
+RNF05 — Usabilidad
+Las interfaces web (usuario y administrador) serán responsivas y operables
+desde navegadores de escritorio y móvil sin necesidad de app nativa.
+
+================================================================================
+6. INTERFACES EXTERNAS
+================================================================================
+- Usuario final: Navegador web (portal de reservas).
+- Administrador: Navegador web (panel de administración).
+- Hardware: ESP32 con cerradura electrónica / servomotor.
+- Protocolo IoT: MQTT sobre TCP o HTTP REST ligero.
+- Base de datos: Motor relacional (MySQL/PostgreSQL) para usuarios, reservas e historial.
+
+================================================================================
+7. REQUERIMIENTOS FUERA DE ALCANCE (ESTA ENTREGA)
+================================================================================
+- App móvil nativa (iOS/Android).
+- Pasarela de pagos en línea.
+- Integración con control de acceso corporativo (LDAP/Active Directory).
+- Notificaciones push o SMS (solo se contempla correo o pantalla web para PIN).
+
+================================================================================
+8. ESTADO Y PRÓXIMOS PASOS
+================================================================================
+Este documento es preliminar. En la siguiente entrega se detallarán:
+- Requerimientos funcionales completos con criterios de aceptación.
+- Historias de usuario (User Stories).
+- Requerimientos no funcionales ampliados (backup, recuperación ante desastres, etc.).
+- Diagramas de secuencia y de estados.
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================
